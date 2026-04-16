@@ -1,6 +1,7 @@
-import javax.swing.*;
 import java.awt.*;
-
+import java.awt.event.*;
+import javax.swing.*;
+// for running this code you need compile and run Swinggui.java file
 public class Swinggui {
     public static void main(String[] args) {
 
@@ -48,6 +49,27 @@ public class Swinggui {
 
         // Submit button
         JButton submit = new JButton("Submit");
+
+        //new Action Listener 
+         
+        submit.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){  
+                String name = nametext.getText();
+                String mail = emailtext.getText();
+                char[] pass = passwordtext.getPassword();
+                String gender = male.isSelected()? "Male":"Female";
+                String interest = "";
+                if(programming.isSelected())
+                    interest+="Programming ";
+                if(travelling.isSelected())
+                    interest+="Travelling ";
+                if(reading.isSelected())
+                    interest+="Reading ";
+                String message = "Name : "+name+"\n Email : "+mail+"\nGender : "+gender+"\nInterests : "+interest;
+                JOptionPane.showMessageDialog(frame,message,"Registration Successful",JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 
         // Add components in pairs
         panel.add(name);
