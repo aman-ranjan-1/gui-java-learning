@@ -48,6 +48,31 @@ public class SwingMenu {
         menubar.add(editmenu);
 
         frame.setJMenuBar(menubar);
+
+        //toolbar
+        
+        JToolBar toolbar = new JToolBar("Toolbar");
+        JButton newbtn = new JButton(new ImageIcon("new.png"));
+        JButton openbtn = new JButton(new ImageIcon("open.png"));
+        JButton savebtn = new JButton(new ImageIcon("save.png"));
+        JButton cutbtn = new JButton(new ImageIcon("cut.png"));
+
+        newbtn.addActionListener( e -> showMessage("New Button Clicked"));
+        openbtn.addActionListener( e -> showMessage("Open Button Clicked"));
+        savebtn.addActionListener( e -> showMessage("Save Button Clicked"));
+        cutbtn.addActionListener( e -> showMessage("Cut Button Clicked"));
+
+        // add to toolbar
+        toolbar.add(newbtn);
+        toolbar.add(openbtn);
+        toolbar.add(savebtn);
+        toolbar.add(cutbtn);
+
+        frame.add(toolbar,BorderLayout.NORTH);
+
         frame.setVisible(true);
+    }
+    private static void showMessage(String msg){
+        JOptionPane.showMessageDialog(null,msg,"Message",JOptionPane.INFORMATION_MESSAGE);
     }
 }
