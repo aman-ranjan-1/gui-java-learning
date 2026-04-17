@@ -1,12 +1,6 @@
 import java.io.File;
-import java.awt.FlowLayout;  
-
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+import java.awt.*;
 
 public class SwingDialogs{
     public static void main(String[] args){
@@ -18,8 +12,16 @@ public class SwingDialogs{
             JButton filechooser = new JButton("Show file chooser Dialog");
             filechooser.addActionListener(e -> showFileChooser(frame));
 
+            JButton colorchooser = new JButton("Show Color chooser Dialog");
+            colorchooser.addActionListener ( e -> showColorChooser(frame));
+
+            JButton dialogbtn = new JButton("Show Dialog");
+            dialogbtn.addActionListener ( e -> showDialog(frame));
+
             JPanel panel = new JPanel(new FlowLayout());
             panel.add(filechooser);
+            panel.add(colorchooser);
+            panel.add(dialogbtn);
 
             frame.add(panel);
             frame.setVisible(true);
@@ -43,5 +45,33 @@ public class SwingDialogs{
                 "File",
                 JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+    private static void showColorChooser(JFrame frame){
+        Color selectedcolor = JColorChooser.showDialog(frame,"choose a color",Color.RED);
+        if(selectedcolor != null){
+            JOptionPane.showMessageDialog(frame,
+                "Selected Color : " + selectedcolor,
+                "Color Chooser",
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(frame,
+                "Color Not Selected / Color Selection Cancelled",
+                "Color Chooser",
+                JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    private static void showDialog(JFrame frame){
+        JDialog customdialog = new JDialog(frame,"Custom Dialog",true);
+        customdialog.setSize(300,200);
+        customdialog.setLayout(new BorderLayout());
+        JLabel  label = new JLabel("This is a Custom Dialog",JLabel.CENTER);
+        JButton closebtn = new JButton ("Close");
+        closebtn.addActionListener(e-> customdialog.dispose());
+        
+        customdialog.add(label,BorderLayout.CENTER);
+        customdialog.add(closebtn,BorderLayout.EAST);
+        customdialog.setLocationRelativeTo(frame);
+        customdialog.setVisible(true);
     }
 }
